@@ -20,6 +20,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     public float aimSpeed = 0.3f;
     public Rig aimLayer;
     public Rig bodyAimLayer;
+    public Rig bodyAimStaticLayer;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -56,7 +57,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
 
             aimLayer.weight += Time.deltaTime / aimSpeed;
-            bodyAimLayer.weight = 1f;
+            bodyAimLayer.weight += Time.deltaTime / aimSpeed;
+            bodyAimStaticLayer.weight = 0f;
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -82,7 +84,8 @@ public class ThirdPersonShooterController : MonoBehaviour
 
 
             aimLayer.weight -= Time.deltaTime / aimSpeed;
-            bodyAimLayer.weight = 0f;
+            bodyAimLayer.weight -= Time.deltaTime / aimSpeed;
+            bodyAimStaticLayer.weight += Time.deltaTime / aimSpeed;
         } 
     }
 }
