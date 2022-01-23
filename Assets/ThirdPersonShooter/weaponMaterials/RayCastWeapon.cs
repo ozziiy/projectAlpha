@@ -15,7 +15,6 @@ public class RayCastWeapon : MonoBehaviour
     public Transform raycastDestination;
     public Transform laserSightOrigin;
 
-
     Ray ray;
     RaycastHit hitInfo;
     float accumalatedTime;
@@ -27,6 +26,7 @@ public class RayCastWeapon : MonoBehaviour
         accumalatedTime = 0.0f;
         FireBullet();
 
+       
     }
 
     public void UpdateFiring(float deltaTime)
