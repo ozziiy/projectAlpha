@@ -19,6 +19,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     public Rig aimLayer;
     public Rig bodyAimLayer;
     public Rig bodyAimStaticLayer;
+    public Rig handIKIdle;
+    public Rig handIKIAim;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -50,8 +52,10 @@ public class ThirdPersonShooterController : MonoBehaviour
             aimLayer.weight += Time.deltaTime / aimSpeed;
             bodyAimLayer.weight += Time.deltaTime / aimSpeed;
             bodyAimStaticLayer.weight -= Time.deltaTime / (aimSpeed);
+            handIKIdle.weight -= Time.deltaTime / (aimSpeed);
+            handIKIAim.weight += Time.deltaTime / (aimSpeed);
 
-            //STARTER ASSET LOOK FORWARD
+            //STARTER ASSET LOOK FORWARD WHEN AIMING
 
             Vector3 mouseWorldPosition = Vector3.zero;
             Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -68,7 +72,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 17f);
             
             
             if (Input.GetButtonDown("Fire1"))
@@ -99,14 +103,15 @@ public class ThirdPersonShooterController : MonoBehaviour
             aimLayer.weight -= Time.deltaTime / aimSpeed;
             bodyAimLayer.weight -= Time.deltaTime / aimSpeed;
             bodyAimStaticLayer.weight += Time.deltaTime / (aimSpeed);
-            
+            handIKIdle.weight += Time.deltaTime / (aimSpeed);
+            handIKIAim.weight -= Time.deltaTime / (aimSpeed);
 
             //TRIED FIXING HEAD CLIPPING WITH GUN 
             //Debug.Log(upperChest.transform.rotation.eulerAngles);
             //if (upperChest.transform.rotation.eulerAngles.x > 46f)
             //{
             //    bodyAimStaticLayer.GetComponentInChildren<MultiRotationConstraint>().weight -= Time.deltaTime / (aimSpeed);
-                
+
             //}
             //else if(upperChest.transform.rotation.eulerAngles.x < 34f)
             //{              
