@@ -22,28 +22,26 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
-    public RayCastWeapon weapon;
-    public ActivateLaser laser;
+    
+    //public ActivateLaser laser;
 
 
     private void Awake() {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
-        weapon = weapon.GetComponentInChildren<RayCastWeapon>();
-        laser = laser.GetComponentInChildren<ActivateLaser>();
+        
+        //laser = laser.GetComponentInChildren<ActivateLaser>();
     }
 
     private void Update()
     {
-
-
         if (starterAssetsInputs.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
             laserDot.gameObject.SetActive(true);
             thirdPersonController.SetRotateOnMove(false);
-            laser.ActivateLaserTrail();
+            //laser.ActivateLaserTrail();
 
             //set animation layers
 
@@ -69,27 +67,11 @@ public class ThirdPersonShooterController : MonoBehaviour
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-            
-            
-            if (Input.GetButtonDown("Fire1"))
-            {
-                weapon.StartFiring();
-
-            }
-            if (weapon.isFiring)
-            {
-                weapon.UpdateFiring(Time.deltaTime);
-            }
-
-            if (Input.GetButtonUp("Fire1"))
-            {
-                weapon.StopFiring();
-            }          
-
+                                 
         }
         else
         {
-            weapon.StopFiring();
+            //weapon.StopFiring();
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
             laserDot.gameObject.SetActive(false);
